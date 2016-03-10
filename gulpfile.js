@@ -28,6 +28,7 @@ var zip = require('gulp-zip');
 
 var merge=require('gulp-merge-link');
 
+var webserver = require('gulp-mock-server');
 
 // gulp 帮助命令说明
 gulp.task('help', function () {
@@ -39,6 +40,7 @@ gulp.task('help', function () {
     console.log('	gulp js-uglify			        压缩混淆js');
     console.log('	gulp zip			        打包成zip文件');
     console.log('	gulp merge			        合并压缩替换在html使用的css,js文件');
+    console.log('	gulp mock			        模拟json接口数据,data目录配置json数据');
 
 });
 
@@ -162,6 +164,17 @@ gulp.task('merge', function () {
         .pipe(gulp.dest('dist/html/'));
 });
 
+//模拟json接口数据 http://localhost:8090/test
+//https://github.com/sanyueyu/gulp-mock-server
+gulp.task('mock', function() {
+    gulp.src('.')
+        .pipe(webserver({
+            livereload: false,
+            directoryListing: true,
+            port: 8090,
+            open: true
+        }));
+});
 
 // 默认task,gulp 命令
 gulp.task('default', function() {
