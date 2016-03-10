@@ -26,6 +26,9 @@ var concat = require('gulp-concat');
 
 var zip = require('gulp-zip');
 
+var merge=require('gulp-merge-link');
+
+
 // gulp 帮助命令说明
 gulp.task('help', function () {
     console.log('	gulp help			        gulp参数说明');
@@ -35,6 +38,7 @@ gulp.task('help', function () {
     console.log('	gulp imagemin			        压缩图片文件');
     console.log('	gulp js-uglify			        压缩混淆js');
     console.log('	gulp zip			        打包成zip文件');
+    console.log('	gulp merge			        合并压缩替换在html使用的css,js文件');
 
 });
 
@@ -147,6 +151,17 @@ gulp.task('zip', function() {
         .pipe(zip('archive.zip'))
         .pipe(gulp.dest('build'));
 });
+
+//gulp-merge合并压缩替换在html使用的css,js文件
+gulp.task('merge', function () {
+    gulp.src('./html/index.html')
+        .pipe(merge({
+            'app.css':['header.css','footer.css','./lib/common.css'],
+            'app.js':['lib/jquery.js','header.js']
+        }))
+        .pipe(gulp.dest('dist/html/'));
+});
+
 
 // 默认task,gulp 命令
 gulp.task('default', function() {
