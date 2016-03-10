@@ -21,6 +21,9 @@ var _ = require('underscore.string');
 
 var imagemin = require('gulp-imagemin');
 
+var uglify = require('gulp-uglify');
+var concat = require('gulp-concat');
+
 // gulp 帮助命令说明
 gulp.task('help', function () {
     console.log('	gulp help			        gulp参数说明');
@@ -28,6 +31,7 @@ gulp.task('help', function () {
     console.log('	gulp css			        postcss处理生成css');
     console.log('	gulp tmpl			        复制现有的模版');
     console.log('	gulp imagemin			    压缩图片文件');
+    console.log('	gulp js-uglify			    压缩混淆js');
 
 });
 
@@ -123,6 +127,17 @@ gulp.task('imagemin', function () {
         .pipe(imagemin())
         .pipe(gulp.dest('build/img'));
 });
+
+//使用gulp-uglify压缩js文件
+gulp.task('js-uglify', function() {
+    return gulp.src(['src/js/a.js',
+            'src/js/b.js'
+            ])
+        .pipe(uglify())
+        .pipe(concat('app.min.js'))
+        .pipe(gulp.dest('build/js'));
+});
+
 
 // 默认task,gulp 命令
 gulp.task('default', function() {
