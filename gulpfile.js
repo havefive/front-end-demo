@@ -19,12 +19,15 @@ var conflict = require('gulp-conflict');
 var pkg = require('./package.json');
 var _ = require('underscore.string');
 
+var imagemin = require('gulp-imagemin');
 
 // gulp 帮助命令说明
 gulp.task('help', function () {
     console.log('	gulp help			        gulp参数说明');
     console.log('	gulp browser-sync			启动浏览器,自动刷新');
     console.log('	gulp css			        postcss处理生成css');
+    console.log('	gulp tmpl			        复制现有的模版');
+    console.log('	gulp imagemin			    压缩图片文件');
 
 });
 
@@ -112,6 +115,13 @@ gulp.task('tmpl', function (done) {
                     done();
                 });
         });
+});
+
+//使用gulp-imagemin压缩图片文件（包括PNG、JPEG、GIF和SVG图片）https://github.com/sindresorhus/gulp-imagemin#user-content-options
+gulp.task('imagemin', function () {
+    gulp.src('src/img/*.{png,jpg,gif,ico}')
+        .pipe(imagemin())
+        .pipe(gulp.dest('build/img'));
 });
 
 // 默认task,gulp 命令
