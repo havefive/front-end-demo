@@ -20,15 +20,14 @@ var pkg = require('./package.json');
 var _ = require('underscore.string');
 
 var imagemin = require('gulp-imagemin');
-
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
-
 var zip = require('gulp-zip');
-
 var merge=require('gulp-merge-link');
-
 var webserver = require('gulp-mock-server');
+
+var spriter = require('gulp-css-spriter');
+
 
 // gulp 帮助命令说明
 gulp.task('help', function () {
@@ -41,6 +40,7 @@ gulp.task('help', function () {
     console.log('	gulp zip			        打包成zip文件');
     console.log('	gulp merge			        合并压缩替换在html使用的css,js文件');
     console.log('	gulp mock			        模拟json接口数据,data目录配置json数据');
+    console.log('	gulp sprite			        合并小图到一张大图');
 
 });
 
@@ -174,6 +174,19 @@ gulp.task('mock', function() {
             port: 8090,
             open: true
         }));
+});
+
+//合并小图到一张sprite
+gulp.task('sprite', function() {
+    return gulp.src('./src/css/style.css')
+        .pipe(spriter({
+        //    // The path and file name of where we will save the sprite sheet
+            'spriteSheet': './dist/images/spritesheet.png',
+        //    // Because we don't know where you will end up saving the CSS file at this point in the pipe,
+        //    // we need a litle help identifying where it will be.
+        //    'pathToSpriteSheetFromCSS': './src/css/img/list-1.png'
+        }))
+        .pipe(gulp.dest('./dist/css'));
 });
 
 // 默认task,gulp 命令
