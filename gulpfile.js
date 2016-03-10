@@ -24,14 +24,17 @@ var imagemin = require('gulp-imagemin');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 
+var zip = require('gulp-zip');
+
 // gulp 帮助命令说明
 gulp.task('help', function () {
     console.log('	gulp help			        gulp参数说明');
     console.log('	gulp browser-sync			启动浏览器,自动刷新');
     console.log('	gulp css			        postcss处理生成css');
     console.log('	gulp tmpl			        复制现有的模版');
-    console.log('	gulp imagemin			    压缩图片文件');
-    console.log('	gulp js-uglify			    压缩混淆js');
+    console.log('	gulp imagemin			        压缩图片文件');
+    console.log('	gulp js-uglify			        压缩混淆js');
+    console.log('	gulp zip			        打包成zip文件');
 
 });
 
@@ -138,6 +141,12 @@ gulp.task('js-uglify', function() {
         .pipe(gulp.dest('build/js'));
 });
 
+//使用gulp-zip压缩文件
+gulp.task('zip', function() {
+    return gulp.src('src/**')
+        .pipe(zip('archive.zip'))
+        .pipe(gulp.dest('build'));
+});
 
 // 默认task,gulp 命令
 gulp.task('default', function() {
