@@ -25,9 +25,8 @@ var concat = require('gulp-concat');
 var zip = require('gulp-zip');
 var merge=require('gulp-merge-link');
 var webserver = require('gulp-mock-server');
-
 var spriter = require('gulp-css-spriter');
-
+var rev = require('gulp-rev');
 
 // gulp 帮助命令说明
 gulp.task('help', function () {
@@ -41,6 +40,7 @@ gulp.task('help', function () {
     console.log('	gulp merge			        合并压缩替换在html使用的css,js文件');
     console.log('	gulp mock			        模拟json接口数据,data目录配置json数据');
     console.log('	gulp sprite			        合并小图到一张大图');
+    console.log('	gulp rev			        文件附加版本号');
 
 });
 
@@ -187,6 +187,13 @@ gulp.task('sprite', function() {
         //    'pathToSpriteSheetFromCSS': './src/css/img/list-1.png'
         }))
         .pipe(gulp.dest('./dist/css'));
+});
+
+//版本控制,unicorn.css → unicorn-d41d8cd98f.css
+gulp.task('rev', function () {
+    return gulp.src('src/*.css')
+        .pipe(rev())
+        .pipe(gulp.dest('dist'));
 });
 
 // 默认task,gulp 命令
