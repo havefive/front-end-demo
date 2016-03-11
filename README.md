@@ -51,3 +51,23 @@ $ gulp js-uglify
 ```bash
 $ gulp zip
 ```
+
+###  合并压缩替换在html使用的css,js文件
+```bash
+$ gulp merge
+```
+
+###  模拟json接口数据,根目录data配置json数据
+```bash
+$ gulp mock
+```
+
+###  合并小图到一张大图
+```bash
+$ gulp sprite
+```
+
+###  文件附加版本号
+```bash
+$ gulp rev
+```

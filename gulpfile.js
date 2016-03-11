@@ -190,6 +190,7 @@ gulp.task('sprite', function() {
 });
 
 //版本控制,unicorn.css → unicorn-d41d8cd98f.css
+//https://github.com/sindresorhus/gulp-rev
 gulp.task('rev', function () {
     return gulp.src('src/*.css')
         .pipe(rev())
