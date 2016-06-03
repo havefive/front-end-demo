@@ -1,8 +1,8 @@
-# 前端工程环境搭建
+# 前端工程demo
 front-end  demo
 ## 开始之前
 
-首先, 安装 [Webpack](https://www.npmjs.com/package/webpack) and [webpack-dev-server](https://www.npmjs.com/package/webpack-dev-server) globally.
+首先, 全局安装 [Webpack](https://www.npmjs.com/package/webpack) and [webpack-dev-server](https://www.npmjs.com/package/webpack-dev-server).
 
 ```bash
 $ npm i -g webpack webpack-dev-server gulp
@@ -22,7 +22,7 @@ $ gulp
 $ gulp help
 ```
 
-### 启动浏览器,自动刷新
+### 开始开发,启动浏览器,自动刷新
 ```bash
 $ gulp browser-sync
 ```
